@@ -1,0 +1,39 @@
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="col-3">
+      <h3>Choose a Villian</h3>
+
+      <div class="d-grid gap-2">
+        <button *ngFor="let villian of villians" class="villian"
+                (click)="selectVillian(villian)"
+                class="btn btn-dark btn-sm">
+          {{villian.name}}
+        </button>&nbsp;
+      </div>
+
+    </div>
+
+    <div class="col-9" *ngIf="selectedVillian">
+
+      <h3>
+        {{selectedVillian.name}}
+        will destroy you with {{selectedVillian.power}}
+      </h3>
+
+      <figure class="figure">
+        <img [src]="selectedVillian.imgUrl" class="figure-img img-fluid rounded" alt="{{selectedVillian.name}}">
+
+        <figcaption class="figure-caption">{{selectedVillian.name}}</figcaption>
+      </figure>
+
+      <h2>
+        <button class="btn btn-dark btn-lg"  (click)="sayHello()">{{selectedVillian.buttonText}}</button> {{message}}
+      </h2>
+    </div>
+
+  </div>
+
+</div>
+
