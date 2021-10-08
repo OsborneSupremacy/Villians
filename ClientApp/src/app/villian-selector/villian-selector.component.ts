@@ -157,7 +157,13 @@ export class VillianSelectorComponent implements OnInit {
       id: 40, name: 'Moe', power: `his big ugly fists`,
       imgUrl: '/assets/images/Moe.png', buttonText: `click here to ask him a question`,
       saying: `uhh...(KAPOW!!!)`
-    }
+    },
+
+    {
+      id: 41, name: 'Voldermort', power: `Magic? No, that's too obvious`,
+      imgUrl: '/assets/images/voldemort.jpg', buttonText: `Click here to reveal the creative way he will destroy you`,
+      saying: `A gun. Yeah, that's right -- he's going to shoot you. Sure, it's not creative. But on the other hand, it works.`
+    },
 
   ];
 
