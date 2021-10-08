@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Villians.Models;
+using Villians.Services;
 
 namespace Villians
 {
@@ -27,6 +28,8 @@ namespace Villians
 
             services.AddSingleton(sp =>
                 sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+
+            services.AddSingleton(typeof(VillianService));
 
             // following this tutorial : https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mongo-app?view=aspnetcore-5.0&tabs=visual-studio
 
