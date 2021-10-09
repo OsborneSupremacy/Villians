@@ -34,7 +34,7 @@ export class VillianSelectorComponent implements OnInit {
 
     let onError = () => { };
 
-    dataService.apiRequest<Villian[]>('https://localhost:5001/api/Villian', onSuccess, onError);
+    dataService.get<Villian[]>('api/Villian', onSuccess, onError);
 
   }
 
