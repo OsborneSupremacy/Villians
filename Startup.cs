@@ -44,7 +44,7 @@ namespace Villians
                     document.Info.Contact = new NSwag.OpenApiContact
                     {
                         Name = "Ben Osborne",
-                        Email = string.Empty,
+                        Email = "ben@osbornesupremacy.com",
                         Url = "https://github.com/OsborneSupremacy"
                     };
                 };
