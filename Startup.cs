@@ -34,6 +34,9 @@ namespace Villians
             // following this tutorial : https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mongo-app?view=aspnetcore-5.0&tabs=visual-studio
 
             services.AddControllersWithViews();
+
+            services.AddSwaggerGen();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -44,6 +47,8 @@ namespace Villians
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
