@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data-service';
 import { Villian } from '../villian'
-
 
 @Component({
   selector: 'app-villian-selector',
@@ -9,12 +9,39 @@ import { Villian } from '../villian'
 })
 export class VillianSelectorComponent implements OnInit {
 
-  constructor() { }
+  public villians: Villian[];
+
+  public selectedVillian: Villian | undefined;
+
+  public message = '';
+
+  public selectVillian(villian: Villian) {
+    this.selectedVillian = villian;
+    this.message = '';
+  }
+
+  public sayHello() {
+    this.message = this.selectedVillian!.saying;
+  }
+
+  constructor(private dataService: DataService) {
+
+    this.villians = [];
+
+    let onSuccess = (result: Villian[]) => {
+      this.villians = result;
+    };
+
+    let onError = () => { };
+
+    dataService.apiRequest<Villian[]>('https://localhost:5001/api/Villian', onSuccess, onError);
+
+  }
 
   ngOnInit(): void {
   }
 
-  villians: Villian[] = [
+  /*villians: Villian[] = [
     { id: "", name: 'Neff', powers: 'Sorcery', imgUrl: '/assets/images/neff.jpg', buttonText: 'Welcome', saying: 'To Your Doom' },
     {
       id: "2", name: 'Michael Corleone', powers: 'Goons',
@@ -168,18 +195,8 @@ export class VillianSelectorComponent implements OnInit {
     },
 
   ];
+  */
 
-  selectedVillian = this.villians[-1];
 
-  message = '';
-
-  selectVillian(villian: Villian) {
-    this.selectedVillian = villian;
-    this.message = '';
-  }
-
-  sayHello() {
-    this.message = this.selectedVillian.saying;
-  }
 
 }
