@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Villians.Models;
 using Villians.Services;
@@ -25,7 +23,7 @@ namespace Villians.Controllers
             await _villianService.GetAsync();
 
         [HttpGet("{id:length(24)}", Name = "GetVillian")]
-        public async Task<ActionResult<Villian>> Get(string id)
+        public async Task<ActionResult<Villian>> GetAsync(string id)
         {
             var villian = await _villianService.GetAsync(id);
 
@@ -36,15 +34,37 @@ namespace Villians.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Villian>> Create(Villian villian)
+        public async Task<ActionResult<Villian>> CreateAsync(Villian villianIn)
         {
-            await _villianService.Create(villian);
-
-            return CreatedAtRoute("GetVillian", new { id = villian.Id.ToString() }, villian);
+            var villianOut = await _villianService.Create(villianIn);
+            return CreatedAtRoute("GetVillian", new { id = villianOut.Id.ToString() }, villianOut);
         }
 
-        // TODO: add update and delete methods
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> UpdateAsync(string id, Villian villianIn)
+        {
+            var villian = await _villianService.GetAsync(id);
 
+            if (villian == null)
+                return NotFound();
+
+            await _villianService.UpdateAsync(id, villianIn);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public async Task<IActionResult> DeleteAsync(string id)
+        {
+            var villian = await _villianService.GetAsync(id);
+
+            if (villian == null)
+                return NotFound();
+
+            await _villianService.RemoveAsync(villian.Id);
+
+            return NoContent();
+        }
 
     }
 }

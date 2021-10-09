@@ -19,24 +19,24 @@ namespace Villians.Services
         }
 
         public async Task<List<Villian>> GetAsync() =>
-            (await _villians.FindAsync(book => true)).ToList();
+            (await _villians.FindAsync(x => true)).ToList();
 
         public async Task<Villian> GetAsync(string id) =>
-            (await _villians.FindAsync<Villian>(book => book.Id == id)).FirstOrDefault();
+            (await _villians.FindAsync<Villian>(x => x.Id == id)).FirstOrDefault();
 
-        public async Task<Villian> Create(Villian book)
+        public async Task<Villian> Create(Villian villian)
         {
-            await _villians.InsertOneAsync(book);
-            return book;
+            await _villians.InsertOneAsync(villian);
+            return villian;
         }
 
-        public async Task UpdateAsync(string id, Villian bookIn) =>
-            await _villians.ReplaceOneAsync(book => book.Id == id, bookIn);
+        public async Task UpdateAsync(string id, Villian villianIn) =>
+            await _villians.ReplaceOneAsync(x => x.Id == id, villianIn);
 
-        public async Task RemoveAsync(Villian bookIn) =>
-            await _villians.DeleteOneAsync(book => book.Id == bookIn.Id);
+        public async Task RemoveAsync(Villian villianIn) =>
+            await _villians.DeleteOneAsync(x => x.Id == villianIn.Id);
 
         public async Task RemoveAsync(string id) =>
-            await _villians.DeleteOneAsync(book => book.Id == id);
+            await _villians.DeleteOneAsync(x => x.Id == id);
     }
 }
