@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,7 +34,21 @@ namespace Villians
 
             services.AddControllersWithViews();
 
-            services.AddSwaggerGen();
+            services.AddSwaggerDocument(config =>
+            {
+                config.PostProcess = document =>
+                {
+                    document.Info.Version = "v1";
+                    document.Info.Title = "Villians";
+                    document.Info.Description = "A .NET Core / Angular sandbox I created to experiment and have fun with my kids.";
+                    document.Info.Contact = new NSwag.OpenApiContact
+                    {
+                        Name = "Ben Osborne",
+                        Email = string.Empty,
+                        Url = "https://github.com/OsborneSupremacy"
+                    };
+                };
+            });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -47,7 +60,9 @@ namespace Villians
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseSwagger();
+            app.UseStaticFiles();
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             if (env.IsDevelopment())
             {
@@ -61,7 +76,7 @@ namespace Villians
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
