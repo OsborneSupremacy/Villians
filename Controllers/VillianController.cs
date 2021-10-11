@@ -45,6 +45,9 @@ namespace Villians.Controllers
         {
             var villian = await _villianService.GetAsync(id);
 
+            // ID can't be updated
+            villianIn.Id = id;
+
             if (villian == null)
                 return NotFound();
 

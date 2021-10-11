@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { VillianSelectorComponent } from './villian-selector/villian-selector.component';
 import { VillianAddComponent } from './villian-add/villian-add.component';
+import { VillianEditComponent } from './villian-edit/villian-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     VillianSelectorComponent,
-    VillianAddComponent
+    VillianAddComponent,
+    VillianEditComponent
   ],
   imports: [
     BrowserModule,

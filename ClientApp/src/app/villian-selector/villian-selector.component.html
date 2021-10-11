@@ -6,11 +6,20 @@
       <h3>Choose a Villian</h3>
 
       <div class="d-grid gap-2">
-        <button *ngFor="let villian of villians" class="villian"
-                (click)="selectVillian(villian)"
-                class="btn btn-dark btn-sm">
-          {{villian.name}}
-        </button>&nbsp;
+
+        <div *ngFor="let villian of villians" >
+
+          <button (click)="select(villian)" class="btn btn-dark btn-sm">
+            {{villian.name}}
+          </button>
+
+          &nbsp;
+          <button (click)="edit(villian)" class="btn btn-dark btn-sm">
+            Edit
+          </button>
+
+        </div>
+
       </div>
 
     </div>
@@ -31,8 +40,14 @@
       <h2>
         <button class="btn btn-dark btn-lg"  (click)="sayHello()">{{selectedVillian()?.buttonText}}</button> {{message}}
       </h2>
+
     </div>
 
+  </div>
+
+  <div class="row" >
+    <div class="col-10"></div>
+    <div class="col-2">Hey</div>
   </div>
 
 </div>

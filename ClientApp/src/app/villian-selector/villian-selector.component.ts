@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { VillianService } from '../villian-service';
 import { Villian } from '../villian'
 
@@ -17,16 +18,24 @@ export class VillianSelectorComponent implements OnInit {
 
   public message = '';
 
-  public selectVillian(villian: Villian) {
+  public select(villian: Villian) {
     this.villianService.selectedVillian = villian;
     this.message = '';
+  }
+
+  public edit(villian: Villian) {
+    this.villianService.selectedVillian = villian;
+    this.router.navigate(['/', 'Edit']);
   }
 
   public sayHello() {
     this.message = this.villianService.selectedVillian!.saying;
   }
 
-  constructor(protected villianService: VillianService) {
+  constructor(
+    protected villianService: VillianService,
+    private router: Router
+    ) {
 
     this.villians = [];
 

@@ -11,20 +11,27 @@ import { Villian } from '../villian';
 })
 export class VillianAddComponent implements OnInit {
 
-  public villian: FormGroup;
+  public villianFg: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private villianService: VillianService,
     private router: Router
-    ) {
+  ) {
 
-    this.villian = this.fb.group({
-      name: ['', [Validators.required]],
-      powers: ['', [Validators.required]],
-      imageUrl: ['', [Validators.required]],
-      buttonText: ['', [Validators.required]],
-      saying: ['', [Validators.required]],
+    let villian = new Villian();
+    villian.name = '',
+    villian.powers = '';
+    villian.imgUrl = '';
+    villian.buttonText = '';
+    villian.saying = '';
+
+    this.villianFg = this.fb.group({
+      name: [villian.name, [Validators.required]],
+      powers: [villian.powers, [Validators.required]],
+      imgUrl: [villian.imgUrl, [Validators.required]],
+      buttonText: [villian.buttonText, [Validators.required]],
+      saying: [villian.saying, [Validators.required]],
     });
 
   }

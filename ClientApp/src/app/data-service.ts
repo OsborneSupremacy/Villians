@@ -30,5 +30,12 @@ export class DataService {
       );
   }
 
+  public put = <T>(subUrl: string, body: T, onSuccess: Function, onError: Function) => {
+    return this.http.put(`${this.baseUrl}${subUrl}`, body)
+      .subscribe(
+        (result) => onSuccess(result),
+        (error) => onError(error)
+      );
+  }
 }
 
