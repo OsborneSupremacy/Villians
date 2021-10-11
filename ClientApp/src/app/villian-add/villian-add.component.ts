@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DataService } from '../data-service';
+import { VillianService } from '../villian-service';
 import { Villian } from '../villian';
 
 @Component({
@@ -15,7 +15,7 @@ export class VillianAddComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dataService: DataService,
+    private villianService: VillianService,
     private router: Router
     ) {
 
@@ -37,12 +37,13 @@ export class VillianAddComponent implements OnInit {
     if(!valid) return;
 
     let onSuccess = (result: Villian) => {
+      this.villianService.Select(result);
       this.router.navigate(['/']);
     };
 
     let onError = () => { };
 
-    this.dataService.post<Villian, Villian>('api/Villian', value, onSuccess, onError);
+    this.villianService.Add(value, onSuccess, onError);
   }
 
 }

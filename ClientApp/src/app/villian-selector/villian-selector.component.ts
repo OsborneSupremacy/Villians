@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data-service';
+import { VillianService } from '../villian-service';
 import { Villian } from '../villian'
 
 @Component({
@@ -11,20 +11,22 @@ export class VillianSelectorComponent implements OnInit {
 
   public villians: Villian[];
 
-  public selectedVillian: Villian | undefined;
+  public selectedVillian(): Villian | undefined {
+    return this.villianService.selectedVillian;
+  }
 
   public message = '';
 
   public selectVillian(villian: Villian) {
-    this.selectedVillian = villian;
+    this.villianService.selectedVillian = villian;
     this.message = '';
   }
 
   public sayHello() {
-    this.message = this.selectedVillian!.saying;
+    this.message = this.villianService.selectedVillian!.saying;
   }
 
-  constructor(private dataService: DataService) {
+  constructor(protected villianService: VillianService) {
 
     this.villians = [];
 
@@ -34,7 +36,7 @@ export class VillianSelectorComponent implements OnInit {
 
     let onError = () => { };
 
-    dataService.get<Villian[]>('api/Villian', onSuccess, onError);
+    villianService.GetAll(onSuccess, onError);
 
   }
 

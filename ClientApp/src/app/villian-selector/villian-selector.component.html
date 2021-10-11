@@ -15,21 +15,21 @@
 
     </div>
 
-    <div class="col-9" *ngIf="selectedVillian">
+    <div class="col-9" *ngIf="selectedVillian()">
 
       <h3>
-        {{selectedVillian.name}}
-        will destroy you with {{selectedVillian.powers}}
+        {{selectedVillian()?.name}}
+        will destroy you with {{selectedVillian()?.powers}}
       </h3>
 
       <figure class="figure">
-        <img style="max-height: 400px; max-width: 400px;" [src]="selectedVillian.imgUrl" class="figure-img img-fluid rounded" alt="{{selectedVillian.name}}">
+        <img style="max-height: 400px; max-width: 400px;" [src]="selectedVillian()?.imgUrl" class="figure-img img-fluid rounded" alt="{{selectedVillian.name}}">
 
-        <figcaption class="figure-caption">{{selectedVillian.name}}</figcaption>
+        <figcaption class="figure-caption">{{selectedVillian()?.name}}</figcaption>
       </figure>
 
       <h2>
-        <button class="btn btn-dark btn-lg"  (click)="sayHello()">{{selectedVillian.buttonText}}</button> {{message}}
+        <button class="btn btn-dark btn-lg"  (click)="sayHello()">{{selectedVillian()?.buttonText}}</button> {{message}}
       </h2>
     </div>
 
