@@ -10,6 +10,10 @@
       <input type="text" class="form-control" placeholder="Power" formControlName="powers" />
     </div>
     <div>
+      <label>Image</label>
+      <input type="file" class="form-control" placeholder="Image" accept="image/*" (change)="fileChange($event)">
+    </div>
+    <div>
       <label>Image URL</label>
       <input type="text" class="form-control" placeholder="Image URL" formControlName="imgUrl" />
     </div>
