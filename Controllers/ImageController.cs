@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 using Villians.Services;
 
 namespace Villians.Controllers
@@ -15,11 +17,27 @@ namespace Villians.Controllers
         }
 
         [HttpGet()]
-        [Route("api/image/{fileName}")]
+        [Route("api/image/get/{fileName}")]
         public IActionResult Get([FromRoute]string fileName)
         {
             var (imageFileStream, fileExtension) = _imageService.GetImage(fileName);
             return File(imageFileStream, $"image/{fileExtension}");
+        }
+
+        [HttpPost]
+        [Route("api/image/upload")]
+        [RequestSizeLimit(5000000)]
+        public async Task<IActionResult> UploadAsync([FromForm] IFormFile image)
+        {
+            if (image == null)
+                return new BadRequestResult();
+
+            var result = await _imageService.UploadImageAsync(image);
+
+            if (!result.Success)
+                return new BadRequestObjectResult(result.Message);
+
+            return new OkObjectResult(result);
         }
     }
 }
