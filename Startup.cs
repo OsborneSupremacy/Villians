@@ -28,9 +28,14 @@ namespace Villians
             services.AddSingleton(sp =>
                 sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
-            services.AddSingleton(typeof(VillianService));
+            services.Configure<ImageSettings>(
+                Configuration.GetSection(nameof(ImageSettings)));
 
-            // following this tutorial : https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mongo-app?view=aspnetcore-5.0&tabs=visual-studio
+            services.AddSingleton(sp =>
+                sp.GetRequiredService<IOptions<ImageSettings>>().Value);
+
+            services.AddSingleton(typeof(VillianService));
+            services.AddSingleton(typeof(ImageService));
 
             services.AddControllersWithViews();
 
