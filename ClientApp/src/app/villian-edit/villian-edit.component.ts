@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ImageService } from '../image-service';
-import { ImageUploadResult } from '../image-service';
+import { ImageService, ImageUploadResult } from '../image-service';
 import { VillianService } from '../villian-service';
 import { Villian } from '../villian';
 

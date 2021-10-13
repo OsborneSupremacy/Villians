@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ImageService, ImageUploadResult } from '../image-service';
 import { VillianService } from '../villian-service';
 import { Villian } from '../villian';
 
@@ -18,6 +19,7 @@ export class VillianAddComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private villianService: VillianService,
+    private imageService: ImageService,
     private router: Router
   ) {
 
@@ -49,9 +51,21 @@ export class VillianAddComponent implements OnInit {
       this.router.navigate(['/']);
     };
 
+    let onImageUploadSuccess = (result: ImageUploadResult) => {
+      value.imageName = result.newFileName;
+      this.villianService.Add(value, onSuccess, onError);
+    };
+
     let onError = () => { };
 
-    this.villianService.Add(value, onSuccess, onError);
+    if(this.image != null)
+    {
+      this.imageService.Add(this.image, onImageUploadSuccess, onError);
+    }
+    else
+    {
+      this.villianService.Add(value, onSuccess, onError);
+    }
   }
 
   public fileChange(event: any) {
