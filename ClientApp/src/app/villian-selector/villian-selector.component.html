@@ -1,35 +1,31 @@
 <div class="card-deck" >
 
-  <div *ngFor="let villian of villians" style="display: inline-flex;margin: 10px;" >
+  <div
+    *ngFor="let villian of villians"
+    class="card text-white bg-dark mb-3"
+    style="width: 18rem;cursor: pointer;display: inline-flex;margin: 10px;"
+    (click)="flip(villian)"
+    >
+    <img class="card-img-top" src="{{getImageUrl(villian)}}" alt="{{villian.name}}" style="height: 100%;object-fit:cover;" >
 
-    <div *ngIf="!villian.flipped"
-      class="card text-white bg-dark mb-3"
-      style="width: 18rem;cursor: pointer;"
-      (click)="flip(villian)"
-      >
-      <img class="card-img-top" src="{{getImageUrl(villian)}}" alt="{{villian.name}}">
-      <div class="card-body">
-        <h5 class="card-title">{{villian.name}}</h5>
-        <p class="card-text text-danger">Will destroy you with <b>{{villian.powers}}</b></p>
-        <blockquote class="blockquote text-center">
-          <p class="mb-0">"{{villian.buttonText}}"</p>
-        </blockquote>
-      </div>
+    <!-- front -->
+    <div *ngIf="!villian.flipped" class="card-body">
+      <h5 class="card-title">{{villian.name}}</h5>
+      <p class="card-text text-danger">Will destroy you with <b>{{villian.powers}}</b></p>
+      <blockquote class="blockquote text-center">
+        <p class="mb-0">"{{villian.buttonText}}"</p>
+      </blockquote>
     </div>
 
-    <div *ngIf="villian.flipped"
-      (click)="flip(villian)"
-      class="card text-white bg-dark mb-3"
-      style="width: 18rem;display: inline-flex;margin: 10px;">
-      <img class="card-img-top" src="{{getImageUrl(villian)}}" alt="{{villian.name}}">
-      <div class="card-body">
-        <blockquote class="blockquote text-center">
-          <p class="mb-0">"{{villian.saying}}"</p>
-        </blockquote>
-        <p class="card-text">
-          <button class="btn btn-sm btn-secondary" (click)="edit(villian)">Edit</button>
-        </p>
-      </div>
+    <!-- back -->
+    <div *ngIf="villian.flipped" class="card-body">
+      <blockquote class="blockquote text-center">
+        <p class="mb-0">"{{villian.buttonText}}</p>
+        <p class="mb-0">{{villian.saying}}"</p>
+      </blockquote>
+      <p class="card-text">
+        <button class="btn btn-sm btn-secondary" (click)="edit(villian)">Edit</button>
+      </p>
     </div>
 
   </div><!--villian repeat-->
