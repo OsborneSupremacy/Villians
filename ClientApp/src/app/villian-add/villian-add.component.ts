@@ -6,12 +6,14 @@ import { Villian } from '../villian';
 
 @Component({
   selector: 'app-villian-add',
-  templateUrl: './villian-add.component.html',
-  styleUrls: ['./villian-add.component.scss']
+  templateUrl: '../villian-edit/villian-edit.component.html',
+  styleUrls: ['../villian-edit/villian-edit.component.scss']
 })
 export class VillianAddComponent implements OnInit {
 
   public villianFg: FormGroup;
+
+  private image: File | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -50,6 +52,12 @@ export class VillianAddComponent implements OnInit {
     let onError = () => { };
 
     this.villianService.Add(value, onSuccess, onError);
+  }
+
+  public fileChange(event: any) {
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0)
+      this.image = fileList[0];
   }
 
 }
