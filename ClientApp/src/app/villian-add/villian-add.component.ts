@@ -22,14 +22,13 @@ export class VillianAddComponent implements OnInit {
     let villian = new Villian();
     villian.name = '',
     villian.powers = '';
-    villian.imgUrl = '';
+    villian.imageName = '';
     villian.buttonText = '';
     villian.saying = '';
 
     this.villianFg = this.fb.group({
       name: [villian.name, [Validators.required]],
       powers: [villian.powers, [Validators.required]],
-      imgUrl: [villian.imgUrl, [Validators.required]],
       buttonText: [villian.buttonText, [Validators.required]],
       saying: [villian.saying, [Validators.required]],
     });

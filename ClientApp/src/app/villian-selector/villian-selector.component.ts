@@ -32,6 +32,10 @@ export class VillianSelectorComponent implements OnInit {
     this.message = this.villianService.selectedVillian!.saying;
   }
 
+  public getImageUrl() {
+    return `/api/image/get/${this.villianService.selectedVillian?.imageName}`;
+  }
+
   constructor(
     protected villianService: VillianService,
     private router: Router

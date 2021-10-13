@@ -27,7 +27,6 @@ export class VillianEditComponent implements OnInit {
     this.villianFg = this.fb.group({
       name: [villianService.selectedVillian?.name, [Validators.required]],
       powers: [villianService.selectedVillian?.powers, [Validators.required]],
-      imgUrl: [villianService.selectedVillian?.imgUrl, [Validators.required]],
       buttonText: [villianService.selectedVillian?.buttonText, [Validators.required]],
       saying: [villianService.selectedVillian?.saying, [Validators.required]],
     });
@@ -51,7 +50,7 @@ export class VillianEditComponent implements OnInit {
     };
 
     let onImageUploadSuccess = (result: ImageUploadResult) => {
-      console.log(result.newFileName);
+      value.imageName = result.newFileName;
       this.villianService.Update(this.villianService.selectedVillian!.id, value, onEditSuccess, onError);
     };
 
@@ -60,10 +59,11 @@ export class VillianEditComponent implements OnInit {
     if(this.image != null)
     {
       this.imageService.Add(this.image, onImageUploadSuccess, onError);
-      // TODO: Add image name to model
     }
     else
     {
+      // if we're not uploading a new image, preserve the exsiting image name
+      value.imageName = this.villianService.selectedVillian!.imageName;
       this.villianService.Update(this.villianService.selectedVillian!.id, value, onEditSuccess, onError);
     }
   }

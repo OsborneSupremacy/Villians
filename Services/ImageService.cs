@@ -40,7 +40,8 @@ namespace Villians.Services
         public (FileStream imageFileStream, string fileExtension) GetImage(string imageName)
         {
             var image = new FileInfo(Path.Combine(_directoryInfo.FullName, imageName));
-            if (!File.Exists(imageName)) image = _defaultImage;
+            if (!image.Exists)
+                image = _defaultImage;
             return (File.OpenRead(image.FullName), image.Extension[1..]);
         }
 

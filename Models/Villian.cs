@@ -13,7 +13,7 @@ namespace Villians.Models
 
         public string Powers { get; set; }
 
-        public string ImgUrl { get; set; }
+        public string ImageName { get; set; }
 
         public string ButtonText { get; set; }
 
