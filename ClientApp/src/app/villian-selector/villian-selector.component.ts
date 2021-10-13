@@ -16,11 +16,8 @@ export class VillianSelectorComponent implements OnInit {
     return this.villianService.selectedVillian;
   }
 
-  public message = '';
-
   public select(villian: Villian) {
     this.villianService.selectedVillian = villian;
-    this.message = '';
   }
 
   public edit(villian: Villian) {
@@ -28,12 +25,12 @@ export class VillianSelectorComponent implements OnInit {
     this.router.navigate(['/', 'Edit']);
   }
 
-  public sayHello() {
-    this.message = this.villianService.selectedVillian!.saying;
+  public flip(villian: Villian) {
+    villian.flipped = !villian.flipped;
   }
 
-  public getImageUrl() {
-    return `/api/image/get/${this.villianService.selectedVillian?.imageName}`;
+  public getImageUrl(villian: Villian) {
+    return `/api/image/get/${villian.imageName}`;
   }
 
   constructor(
