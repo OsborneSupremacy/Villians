@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.10" />
     <PackageReference Include="MongoDB.Driver" Version="2.13.1" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.13.2" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.2" />
   </ItemGroup>
 

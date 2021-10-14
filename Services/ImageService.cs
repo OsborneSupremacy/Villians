@@ -9,6 +9,8 @@ namespace Villians.Services
 {
     public class ImageService
     {
+        private readonly ImageResizeService _imageResizeService;
+
         private readonly ImageSettings _imageSettings;
 
         private readonly DirectoryInfo _directoryInfo;
@@ -29,8 +31,12 @@ namespace Villians.Services
             ".tiff"
         };
 
-        public ImageService(ImageSettings imageSettings)
+        public ImageService(
+        ImageResizeService imageResizeService,
+        ImageSettings imageSettings
+        )
         {
+            _imageResizeService = imageResizeService ?? throw new ArgumentNullException(nameof(imageResizeService));
             _imageSettings = imageSettings ?? throw new ArgumentNullException(nameof(imageSettings));
             _directoryInfo = new DirectoryInfo(_imageSettings.Path);
             // TODO: store default image in application
@@ -57,6 +63,9 @@ namespace Villians.Services
 
             await using var stream = new FileStream(newFileFullName, FileMode.Create);
             await image.CopyToAsync(stream);
+            await stream.DisposeAsync();
+
+            _imageResizeService.MakeImageSquare(newFileFullName);
 
             return new ImageUploadResult(true, "", newFileName);
         }

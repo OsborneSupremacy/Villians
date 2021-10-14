@@ -36,6 +36,7 @@ namespace Villians
 
             services.AddSingleton(typeof(VillianService));
             services.AddSingleton(typeof(ImageService));
+            services.AddSingleton(typeof(ImageResizeService));
 
             services.AddControllersWithViews();
 
