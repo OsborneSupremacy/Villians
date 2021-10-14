@@ -21,7 +21,7 @@
     <div *ngIf="villian.flipped" class="card-body">
       <blockquote class="blockquote text-center">
         <p class="mb-0">"{{villian.buttonText}}</p>
-        <p class="mb-0">{{villian.saying}}"</p>
+        <p class="mb-0 text-danger">{{villian.saying}}"</p>
       </blockquote>
       <p class="card-text">
         <button class="btn btn-sm btn-secondary" (click)="edit(villian)">Edit</button>
