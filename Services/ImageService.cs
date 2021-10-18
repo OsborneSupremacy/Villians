@@ -67,7 +67,7 @@ namespace Villians.Services
 
             _imageResizeService.MakeImageSquare(newFileFullName);
 
-            return new ImageUploadResult(true, "", newFileName);
+            return new ImageUploadResult(true, string.Empty, newFileName);
         }
     }
 
@@ -78,6 +78,7 @@ namespace Villians.Services
         public string Message { get; }
 
         public string NewFileName { get; }
+
 
         public ImageUploadResult(bool success, string message, string newFileName)
         {
