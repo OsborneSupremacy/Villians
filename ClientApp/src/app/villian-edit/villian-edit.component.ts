@@ -35,41 +35,29 @@ export class VillianEditComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public onSubmit({ value, valid }: { value: Villian, valid: boolean })
-  {
+  public async onSubmit({ value, valid }: { value: Villian, valid: boolean }) {
     if (!valid) return;
 
-    let onGetSuccess = (result: Villian) => {
-      this.villianService.Select(result);
-      this.router.navigate(['/']);
-    };
-
-    let onEditSuccess = () => {
-      this.villianService.Get(this.villianService.selectedVillian!.id, onGetSuccess, onError);
-    };
-
-    let onImageUploadSuccess = (result: ImageUploadResult) => {
-      value.imageName = result.newFileName;
-      this.villianService.Update(this.villianService.selectedVillian!.id, value, onEditSuccess, onError);
-    };
-
-    let onError = () => { };
-
-    if(this.image != null)
-    {
-      this.imageService.Add(this.image, onImageUploadSuccess, onError);
+    if (this.image != null) {
+      let imageUploadResult = await this.imageService.AddAsync(this.image);
+      value.imageName = imageUploadResult.newFileName;
     }
     else
     {
       // if we're not uploading a new image, preserve the exsiting image name
       value.imageName = this.villianService.selectedVillian!.imageName;
-      this.villianService.Update(this.villianService.selectedVillian!.id, value, onEditSuccess, onError);
     }
+
+    await this.villianService.UpdateAsync(this.villianService.selectedVillian!.id, value);
+
+    let villianOut = await this.villianService.GetAsync(this.villianService.selectedVillian!.id);
+    this.villianService.Select(villianOut);
+    this.router.navigate(['/']);
   }
 
   public fileChange(event: any) {
     let fileList: FileList = event.target.files;
-    if(fileList.length > 0)
+    if (fileList.length > 0)
       this.image = fileList[0];
   }
 }

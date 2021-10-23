@@ -23,6 +23,10 @@ export class VillianService {
     return this.dataService.get<Villian>(`api/Villian/${id}`, onSuccess, onError);
   }
 
+  public async GetAsync(id: string) {
+    return this.dataService.GetAsync<Villian>(`api/Villian/${id}`);
+  }
+
   public GetAll(onSuccess: Function, onError: Function) {
     return this.dataService.get<Villian[]>('api/Villian', onSuccess, onError);
   }
@@ -33,6 +37,10 @@ export class VillianService {
 
   public Update(id: string, villian: Villian, onSuccess: Function, onError: Function) {
     return this.dataService.put<Villian>(`api/Villian/${id}`, villian, onSuccess, onError);
+  }
+
+  public async UpdateAsync(id: string, villian: Villian) {
+    return await this.dataService.PutAsync<Villian>(`api/Villian/${id}`, villian);
   }
 
 }

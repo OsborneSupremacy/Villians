@@ -12,6 +12,17 @@ export class ImageService {
 
   }
 
+  public async AddAsync(image: File) {
+
+    const formData = new FormData();
+    formData.append('image', image);
+
+    var result = await this.http.post<ImageUploadResult>(`${this.baseUrl}api/image/upload`, formData)
+      .toPromise();
+
+    return result;
+  }
+
   public Add(image: File, onSuccess: Function, onError: Function) {
 
     const formData = new FormData();
