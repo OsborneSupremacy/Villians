@@ -39,15 +39,12 @@ export class VillianSelectorComponent implements OnInit {
     ) {
 
     this.villians = [];
+    this.populateVillians();
+  }
 
-    let onSuccess = (result: Villian[]) => {
-      this.villians = result;
-    };
-
-    let onError = () => { };
-
-    villianService.GetAll(onSuccess, onError);
-
+  private async populateVillians()
+  {
+    this.villians = await this.villianService.GetAllAsync();
   }
 
   ngOnInit(): void {

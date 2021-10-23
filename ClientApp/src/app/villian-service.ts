@@ -19,24 +19,16 @@ export class VillianService {
     this.selectedVillian = villian;
   }
 
-  public Get(id: string, onSuccess: Function, onError: Function) {
-    return this.dataService.get<Villian>(`api/Villian/${id}`, onSuccess, onError);
-  }
-
   public async GetAsync(id: string) {
     return this.dataService.GetAsync<Villian>(`api/Villian/${id}`);
   }
 
-  public GetAll(onSuccess: Function, onError: Function) {
-    return this.dataService.get<Villian[]>('api/Villian', onSuccess, onError);
+  public async GetAllAsync() {
+    return this.dataService.GetAsync<Villian[]>('api/Villian');
   }
 
-  public Add(villian: Villian, onSuccess: Function, onError: Function) {
-    return this.dataService.post<Villian, Villian>('api/Villian', villian, onSuccess, onError);
-  }
-
-  public Update(id: string, villian: Villian, onSuccess: Function, onError: Function) {
-    return this.dataService.put<Villian>(`api/Villian/${id}`, villian, onSuccess, onError);
+  public async AddAsync(villian: Villian) {
+    return await this.dataService.PostAsync<Villian, Villian>('api/Villian', villian);
   }
 
   public async UpdateAsync(id: string, villian: Villian) {

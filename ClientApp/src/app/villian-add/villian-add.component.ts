@@ -42,30 +42,20 @@ export class VillianAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public onSubmit({ value, valid }: { value: Villian, valid: boolean })
+  public async onSubmit({ value, valid }: { value: Villian, valid: boolean })
   {
     if(!valid) return;
 
-    let onSuccess = (result: Villian) => {
-      this.villianService.Select(result);
-      this.router.navigate(['/']);
-    };
-
-    let onImageUploadSuccess = (result: ImageUploadResult) => {
-      value.imageName = result.newFileName;
-      this.villianService.Add(value, onSuccess, onError);
-    };
-
-    let onError = () => { };
-
     if(this.image != null)
     {
-      this.imageService.Add(this.image, onImageUploadSuccess, onError);
+      let imageUploadResult = await this.imageService.AddAsync(this.image);
+      value.imageName = imageUploadResult.newFileName;
     }
-    else
-    {
-      this.villianService.Add(value, onSuccess, onError);
-    }
+
+    let villianOut = await this.villianService.AddAsync(value);
+    this.villianService.Select(villianOut);
+    this.router.navigate(['/']);
+
   }
 
   public fileChange(event: any) {

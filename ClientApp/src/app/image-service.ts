@@ -17,22 +17,11 @@ export class ImageService {
     const formData = new FormData();
     formData.append('image', image);
 
+    // TODO -- use dataservice here?
     var result = await this.http.post<ImageUploadResult>(`${this.baseUrl}api/image/upload`, formData)
       .toPromise();
 
     return result;
-  }
-
-  public Add(image: File, onSuccess: Function, onError: Function) {
-
-    const formData = new FormData();
-    formData.append('image', image);
-
-    return this.http.post<ImageUploadResult>(`${this.baseUrl}api/image/upload`, formData)
-      .subscribe(
-        (result: ImageUploadResult) => onSuccess(result),
-        (error) => onError(error)
-      );
   }
 }
 
