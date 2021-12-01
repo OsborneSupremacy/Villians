@@ -18,7 +18,7 @@ namespace Villians.Controllers
 
         [HttpGet()]
         [Route("api/image/get/{fileName}")]
-        public IActionResult Get([FromRoute]string fileName)
+        public FileStreamResult Get([FromRoute]string fileName)
         {
             var (imageFileStream, fileExtension) = _imageService.GetImage(fileName);
             return File(imageFileStream, $"image/{fileExtension}");
@@ -27,7 +27,7 @@ namespace Villians.Controllers
         [HttpPost]
         [Route("api/image/upload")]
         [RequestSizeLimit(5000000)]
-        public async Task<IActionResult> UploadAsync([FromForm] IFormFile image)
+        public async Task<ActionResult<ImageUploadResult>> UploadAsync([FromForm] IFormFile image)
         {
             if (image == null)
                 return new BadRequestResult();
