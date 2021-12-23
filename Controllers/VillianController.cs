@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace Villians.Controllers
             await _villianService.GetAsync();
 
         [HttpGet("{id:length(24)}", Name = "GetVillian")]
+        [ProducesResponseType(typeof(ActionResult<ImageUploadResult>), StatusCodes.Status200OK)]
         public async Task<ActionResult<Villian>> GetAsync(string id)
         {
             var villian = await _villianService.GetAsync(id);
@@ -34,6 +36,7 @@ namespace Villians.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(CreatedAtRouteResult), StatusCodes.Status200OK)]
         public async Task<ActionResult<Villian>> CreateAsync(Villian villianIn)
         {
             var villianOut = await _villianService.Create(villianIn);

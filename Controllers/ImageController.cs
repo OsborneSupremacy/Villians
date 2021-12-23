@@ -27,6 +27,7 @@ namespace Villians.Controllers
         [HttpPost]
         [Route("api/image/upload")]
         [RequestSizeLimit(5000000)]
+        [ProducesResponseType(typeof(ActionResult<ImageUploadResult>), StatusCodes.Status200OK)]
         public async Task<ActionResult<ImageUploadResult>> UploadAsync([FromForm] IFormFile image)
         {
             if (image == null)
