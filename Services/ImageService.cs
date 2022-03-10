@@ -17,7 +17,7 @@ namespace Villians.Services
 
         private readonly FileInfo _defaultImage;
 
-        private readonly HashSet<string> _fileExtensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
+        private readonly HashSet<string> _fileExtensions = new(StringComparer.OrdinalIgnoreCase) {
             ".apng",
             ".avif",
             ".gif",
