@@ -64,10 +64,8 @@ namespace Villians.Controllers
         {
             var villian = await _villianService.GetAsync(id);
 
-            if (villian == null)
-                return NotFound();
-
-            await _villianService.RemoveAsync(villian.Id);
+            if (villian != null)
+                await _villianService.RemoveAsync(villian.Id);
 
             return NoContent();
         }

@@ -18,7 +18,7 @@ namespace Villians.Controllers
 
         [HttpGet()]
         [Route("api/image/get/{fileName}")]
-        public FileStreamResult Get([FromRoute]string fileName)
+        public FileStreamResult Get([FromRoute] string fileName)
         {
             var (imageFileStream, fileExtension) = _imageService.GetImage(fileName);
             return File(imageFileStream, $"image/{fileExtension}");

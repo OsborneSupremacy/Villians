@@ -13,7 +13,7 @@ namespace Villians.Services
         {
             using var image = Image.Load(imagePath);
 
-            if(image.Width != image.Height)
+            if (image.Width != image.Height)
             {
                 var longerEdge = image.Width > image.Height ? image.Width : image.Height;
                 image.Mutate(x =>
