@@ -1,7 +1,6 @@
-﻿namespace Villians.Models
+﻿namespace Villians.Models;
+
+public class ImageSettings
 {
-    public class ImageSettings
-    {
-        public string Path { get; set; }
-    }
+    public string Path { get; set; }
 }
