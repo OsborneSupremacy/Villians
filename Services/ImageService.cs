@@ -65,14 +65,13 @@ public class ImageService
     }
 }
 
-public struct ImageUploadResult
+public readonly record struct ImageUploadResult
 {
     public bool Success { get; }
 
     public string Message { get; }
 
     public string NewFileName { get; }
-
 
     public ImageUploadResult(bool success, string message, string newFileName)
     {
