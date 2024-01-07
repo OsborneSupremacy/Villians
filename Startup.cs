@@ -43,7 +43,7 @@ public class Startup
             config.PostProcess = document =>
             {
                 document.Info.Version = "v1";
-                document.Info.Title = "Villians";
+                document.Info.Title = "Villains";
                 document.Info.Description = "A .NET Core / Angular sandbox I created to experiment and have fun with my kids.";
                 document.Info.Contact = new NSwag.OpenApiContact
                 {
@@ -66,7 +66,7 @@ public class Startup
     {
         app.UseStaticFiles();
         app.UseOpenApi();
-        app.UseSwaggerUi3();
+        app.UseSwaggerUi();
 
         if (env.IsDevelopment())
         {
